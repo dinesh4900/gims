@@ -45,13 +45,13 @@ const router = useRouter();
 const auth = useFirebaseAuth();
 const user = useCurrentUser();
 
-watch(user, (val) => {
-  if (val?.email) {
-    router.push('/');
-  } else if (!val?.email) {
-    router.push('/login');
-  }
-});
+// watch(user, (val) => {
+//   if (val?.email) {
+//     router.push('/');
+//   } else if (!val?.email) {
+//     router.push('/login');
+//   }
+// });
 
 const handleLogin = async () => {
   try {

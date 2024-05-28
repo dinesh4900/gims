@@ -1,17 +1,17 @@
 <template>
-  <div>Home page</div>
+  <div class="">Home page</div>
 </template>
 
 <script setup lang="ts">
 const user = useCurrentUser();
 
-onMounted(() => {
-  if (user?.value?.email) {
-    navigateTo('/');
-  } else if (!user.value?.email) {
-    navigateTo('/login');
-  }
-});
+// onMounted(() => {
+//   if (user?.value?.email) {
+//     navigateTo('/');
+//   } else if (!user.value?.email) {
+//     navigateTo('/login');
+//   }
+// });
 </script>
 <style lang="scss">
 .nav-link {

@@ -4,8 +4,19 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  modules: ['@nuxtjs/apollo', 'nuxt-vuefire'],
+  modules: ['@nuxtjs/apollo', 'nuxt-vuefire', '@nuxtjs/tailwindcss'],
+  tailwindcss: {
+    // Options
+  },
   ssr: false,
+  components: [
+    {
+      global: true,
+      path: '~/components',
+      extensions: ['.vue'],
+      pathPrefix: false,
+    },
+  ],
   vuefire: {
     // debug: process.env.NODE_ENV !== 'production',
     // isTokenAutoRefreshEnabled: true,
