@@ -54,9 +54,7 @@
   </div>
 </template>
 
-Employees:
-
-<script setup>
+<script setup lang="">
 const people = [
   {
     name: 'Guhan Gunasekaran',

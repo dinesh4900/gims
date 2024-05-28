@@ -2,7 +2,32 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   typescript: {
-    strict: true,
+    strict: true
+  },
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      title: 'Gims',
+      meta: [
+        {
+          name: 'Gims',
+          content: 'Gims'
+        }
+      ],
+
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'
+        }
+      ],
+      bodyAttrs: {
+        class: 'cloudedvoy-ui'
+      }
+    },
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   modules: ['@nuxtjs/apollo', 'nuxt-vuefire', '@nuxtjs/tailwindcss'],
   tailwindcss: {
@@ -14,14 +39,14 @@ export default defineNuxtConfig({
       global: true,
       path: '~/components',
       extensions: ['.vue'],
-      pathPrefix: false,
-    },
+      pathPrefix: false
+    }
   ],
   vuefire: {
     // debug: process.env.NODE_ENV !== 'production',
     // isTokenAutoRefreshEnabled: true,
     auth: {
-      enabled: true,
+      enabled: true
     },
     config: {
       apiKey: 'AIzaSyAXma9S9x19lXpu9GpYvHtqHt5zVNeUmTE',
@@ -29,7 +54,7 @@ export default defineNuxtConfig({
       projectId: 'gims-51260',
       storageBucket: 'gims-51260.appspot.com',
       messagingSenderId: '785581755519',
-      appId: '1:785581755519:web:038b2279e6fbf7d6dc434a',
-    },
-  },
-});
+      appId: '1:785581755519:web:038b2279e6fbf7d6dc434a'
+    }
+  }
+})

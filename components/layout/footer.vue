@@ -2,91 +2,57 @@
   <footer class="bg-white" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
-      <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-        <img
-          class="h-7"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Company name"
-        />
-        <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-          <div class="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">
-                Solutions
-              </h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.solutions" :key="item.name">
-                  <a
-                    :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
-                    >{{ item.name }}</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">
-                Support
-              </h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.support" :key="item.name">
-                  <a
-                    :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
-                    >{{ item.name }}</a
-                  >
-                </li>
-              </ul>
-            </div>
+      <div class="xl:flex xl:justify-between xl:items-start">
+        <div>
+          <img class="w-auto h-8" src="~/assets/logo.svg" alt="Your Company" />
+          <div class="mt-6 flex space-x-6">
+            <a
+              v-for="item in navigation.social"
+              :key="item.name"
+              :href="item.href"
+              class="text-gray-400 hover:text-gray-500"
+            >
+              <span class="sr-only">{{ item.name }}</span>
+              <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
+            </a>
           </div>
-          <div class="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">
-                Company
-              </h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.company" :key="item.name">
-                  <a
-                    :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
-                    >{{ item.name }}</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">
-                Legal
-              </h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.legal" :key="item.name">
-                  <a
-                    :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
-                    >{{ item.name }}</a
-                  >
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div class="mt-16 grid grid-cols-2 gap-8 xl:mt-0 xl:flex xl:space-x-40">
+          <div>
+            <h3 class="text-sm font-semibold leading-6 text-gray-900">
+              Explore
+            </h3>
+            <ul role="list" class="mt-6 space-y-4">
+              <li v-for="item in navigation.explore" :key="item.name">
+                <a
+                  :href="item.href"
+                  class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                  >{{ item.name }}</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold leading-6 text-gray-900">
+              Solutions
+            </h3>
+            <ul role="list" class="mt-6 space-y-4">
+              <li v-for="item in navigation.company" :key="item.name">
+                <a
+                  :href="item.href"
+                  class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                  >{{ item.name }}</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
       </div>
       <div
-        class="mt-8 border-t border-gray-900/10 pt-8 md:flex md:items-center md:justify-between"
+        class="mt-8 border-t border-gray-900/10 pt-8 md:flex md:items-center md:justify-between text-center"
       >
-        <div class="flex space-x-6 md:order-2">
-          <a
-            v-for="item in navigation.social"
-            :key="item.name"
-            :href="item.href"
-            class="text-gray-400 hover:text-gray-500"
-          >
-            <span class="sr-only">{{ item.name }}</span>
-            <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
-          </a>
-        </div>
         <p class="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">
-          &copy; 2020 Your Company, Inc. All rights reserved.
+          &copy; 2022, GIMS. All rights reserved.
         </p>
       </div>
     </div>
@@ -97,29 +63,16 @@
 import { defineComponent, h } from 'vue'
 
 const navigation = {
-  solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' }
-  ],
-  support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Status', href: '#' }
+  explore: [
+    { name: 'Products', href: '/products' },
+    { name: 'Services', href: '/services' },
+    { name: 'Why Choose Us', href: '/why-us' }
   ],
   company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' }
-  ],
-  legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' }
+    { name: 'Contact', href: '/contact-us' },
+    { name: 'Our Team', href: '/our-team' },
+    { name: 'Terms and services', href: '/terms' },
+    { name: 'Privacy Policy', href: '/privacy' }
   ],
   social: [
     {

@@ -4,14 +4,11 @@
       class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       aria-label="Global"
     >
-      <a href="#" class="-m-1.5 p-1.5">
-        <span class="sr-only">Your Company</span>
-        <img
-          class="h-8 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt=""
-        />
-      </a>
+      <NuxtLink to="/">
+        <div class="flex items-center shrink-0">
+          <img class="w-auto h-8" src="~/assets/logo.svg" alt="Your Company" />
+        </div>
+      </NuxtLink>
       <div class="flex lg:hidden">
         <button
           type="button"
@@ -30,9 +27,6 @@
           class="text-sm font-semibold leading-6 text-gray-900"
           >{{ item.name }}</a
         >
-        <!-- <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-          >Log in <span aria-hidden="true">&rarr;</span></a
-        > -->
       </div>
     </nav>
     <Dialog
@@ -45,14 +39,15 @@
         class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
       >
         <div class="flex items-center justify-between">
-          <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
-            <img
-              class="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt=""
-            />
-          </a>
+          <NuxtLink to="/">
+            <div class="flex items-center shrink-0">
+              <img
+                class="w-auto h-8"
+                src="~/assets/logo.svg"
+                alt="Your Company"
+              />
+            </div>
+          </NuxtLink>
           <button
             type="button"
             class="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -66,20 +61,13 @@
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
               <a
-                v-for="item in navigation"
+                v-for="item in mobileNavigation"
                 :key="item.name"
                 :href="item.href"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >{{ item.name }}</a
               >
             </div>
-            <!-- <div class="py-6">
-              <a
-                href="#"
-                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Log in</a
-              >
-            </div> -->
           </div>
         </div>
       </DialogPanel>
@@ -88,15 +76,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { Dialog, DialogPanel } from '@headlessui/vue';
+import { ref } from 'vue'
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { Dialog, DialogPanel } from '@headlessui/vue'
 
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Services', href: '#' },
-  { name: 'Contact', href: '#' },
-];
+  { name: 'Product', href: '/products' },
+  { name: 'Services', href: '/services' },
+  { name: 'Contact', href: '/contact-us' }
+]
 
-const mobileMenuOpen = ref(false);
+const mobileNavigation = [
+  { name: 'Products', href: '/products' },
+  { name: 'Services', href: '/services' },
+  { name: 'Why Choose Us', href: '/why-us' },
+  { name: 'Contact', href: '/contact-us' },
+  { name: 'Our Team', href: '/our-team' },
+  { name: 'Terms and services', href: '/terms' },
+  { name: 'Privacy Policy', href: '/privacy' }
+]
+
+const mobileMenuOpen = ref(false)
 </script>
