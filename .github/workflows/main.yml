@@ -48,13 +48,3 @@ jobs:
           echo "SSH login successful. User: $USER"
           cd ~/gims-v2/client
           ./deploy.sh
-
-    - name: Start new application
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          yarn preview
