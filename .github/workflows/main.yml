@@ -47,7 +47,8 @@ jobs:
         script: |
           echo "SSH login successful. User: $USER"
           cd ~/gims-v2/client/gims
-          node -v
+          pwd
+          sudo node -v
           nvm use 20
           rm yarn.lock
           yarn
