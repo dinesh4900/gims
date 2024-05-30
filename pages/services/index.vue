@@ -3,10 +3,25 @@
     <div
       class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
     >
-      <div class="mx-auto max-w-2xl lg:mx-0">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Services and support
-        </h2>
+      <div class="w-full">
+        <div class="flex items-center justify-between end-0">
+          <h2
+            class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Services and support
+          </h2>
+          <div class="text-center">
+            <Button
+              color="purple"
+              size="sm"
+              class="!font-medium items-start"
+              @click="handleOpenSubmitRequirements"
+            >
+              Submit requirements
+            </Button>
+          </div>
+        </div>
+
         <p class="mt-6 text-lg leading-8 text-gray-600">
           We provide world-class services and support with our wide-spread
           expertise in various fields
@@ -31,14 +46,16 @@
           </h3>
         </div>
       </div>
-      <Button
-        color="purple"
-        size="sm"
-        class="!font-medium"
-        @click="handleOpenSubmitRequirements"
-      >
-        Submit requirements
-      </Button>
+      <div class="mt-10 text-center">
+        <Button
+          color="purple"
+          size="sm"
+          class="!font-medium items-start"
+          @click="handleOpenSubmitRequirements"
+        >
+          Submit requirements
+        </Button>
+      </div>
     </div>
   </div>
   <ServiceRequirements
