@@ -13,6 +13,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Verify SSH connection
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          echo "SSH login successful. User: ${{ secrets.SSH_USER }}"
+          whoami
+          hostname
+          pwd
+
     - name: Stop existing application
       uses: appleboy/ssh-action@master
       with:
