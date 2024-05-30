@@ -31,11 +31,28 @@
           </h3>
         </div>
       </div>
+      <Button
+        color="purple"
+        size="sm"
+        class="!font-medium"
+        @click="handleOpenSubmitRequirements"
+      >
+        Submit requirements
+      </Button>
     </div>
   </div>
+  <ServiceRequirements
+    :is-modal-open="openSubmitRequirements"
+    @update:open-event="openSubmitRequirements = $event"
+  />
 </template>
 
 <script setup lang="ts">
+const openSubmitRequirements = ref(false)
+
+const handleOpenSubmitRequirements = () => {
+  openSubmitRequirements.value = true
+}
 const products = [
   {
     id: 1,

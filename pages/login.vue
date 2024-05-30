@@ -35,43 +35,45 @@
 </template>
 
 <script setup lang="ts">
-import { signInWithEmailAndPassword, type Auth } from 'firebase/auth';
-import { reactive } from 'vue';
-import Input from '../components/form/input.vue';
+import { signInWithEmailAndPassword, type Auth } from 'firebase/auth'
+import { reactive } from 'vue'
+import Input from '../components/form/input.vue'
 
-const form = reactive({ email: '', password: '' });
-const router = useRouter();
+const form = reactive({ email: '', password: '' })
+const router = useRouter()
+const { onLogin } = useApollo()
 
-const auth = useFirebaseAuth();
-const user = useCurrentUser();
+const auth = useFirebaseAuth()
+const user = useCurrentUser()
 
-// watch(user, (val) => {
-//   if (val?.email) {
-//     router.push('/');
-//   } else if (!val?.email) {
-//     router.push('/login');
-//   }
-// });
+watch(user, (val) => {
+  if (val?.email) {
+    router.push('/')
+  } else if (!val?.email) {
+    router.push('/login')
+  }
+})
 
 const handleLogin = async () => {
   try {
-    const accessToken = useCookie('accessToken');
-    await signInWithEmailAndPassword(auth as Auth, form.email, form.password);
-    const tokenId = await auth?.currentUser?.getIdToken();
-    accessToken.value = tokenId;
+    const accessToken = useCookie('accessToken')
+    await signInWithEmailAndPassword(auth as Auth, form.email, form.password)
+    const tokenId = await auth?.currentUser?.getIdToken()
+    accessToken.value = tokenId
     if (tokenId) {
-      router.push('/');
+      onLogin(tokenId)
+      router.push('/')
     }
   } catch (error: any) {
     if (
       error.code === 'auth/invalid-email' ||
       error.code === 'auth/invalid-credential'
     ) {
-      console.log('Invalid credentials');
+      console.log('Invalid credentials')
     } else {
-      console.log('Error occured');
+      console.log('Error occured')
     }
-    console.log(error, 'Login - Error');
+    console.log(error, 'Login - Error')
   }
-};
+}
 </script>

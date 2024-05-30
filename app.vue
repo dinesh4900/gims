@@ -5,18 +5,21 @@
 </template>
 
 <script setup lang="ts">
+import { useUser } from './composables/User/useUser'
+
 const firebaseAuth = useFirebaseAuth()
 const user = useCurrentUser()
 const router = useRouter()
+const { onLogin } = useApollo()
 
 const idToken = ref('')
 
 const refreshIdToken = async () => {
-  const accessToken = useCookie('accessToken')
   if (firebaseAuth?.currentUser) {
     try {
       const newIdToken = await user.value?.getIdToken(true)
-      accessToken.value = newIdToken
+      idToken.value = newIdToken ?? ''
+      onLogin(newIdToken, 'default')
     } catch (error) {
       console.error('Error refreshing ID token:', error)
     }
@@ -25,13 +28,13 @@ const refreshIdToken = async () => {
 
 onMounted(() => {
   firebaseAuth?.onAuthStateChanged(async (user) => {
-    const accessToken = useCookie('accessToken')
     const initialIdToken = await user?.getIdToken()
-    accessToken.value = initialIdToken
-    // const tokenRefreshInterval = setInterval(refreshIdToken, 900000);
-    // onUnmounted(() => {
-    //   clearInterval(tokenRefreshInterval)
-    // })
+    idToken.value = initialIdToken ?? ''
+    onLogin(initialIdToken, 'default')
+    const tokenRefreshInterval = setInterval(refreshIdToken, 300000)
+    onUnmounted(() => {
+      clearInterval(tokenRefreshInterval)
+    })
   })
 })
 
@@ -42,8 +45,8 @@ watch(
     if (!_user) {
       router.push('/login')
     } else if (_user) {
-      // const { refetch: fetchuser } = useUser();
-      // await fetchuser();
+      const { refetch: fetchuser } = useUser()
+      await fetchuser()
     }
   },
   { immediate: true }

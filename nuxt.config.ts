@@ -30,8 +30,25 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   modules: ['@nuxtjs/apollo', 'nuxt-vuefire', '@nuxtjs/tailwindcss'],
+  buildModules: ['@nuxt/typescript-build'],
   tailwindcss: {
     // Options
+  },
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: process.env.gimsLink,
+        defaultOptions: {},
+        tokenName: 'apollo:default.token',
+        inMemoryCacheOptions: {}
+      },
+      gims: {
+        httpEndpoint: process.env.gimsLink,
+        defaultOptions: {},
+        tokenName: 'apollo:default.token',
+        inMemoryCacheOptions: {}
+      }
+    }
   },
   ssr: false,
   components: [
@@ -48,13 +65,27 @@ export default defineNuxtConfig({
     auth: {
       enabled: true
     },
+
+    // old
+
+    // config: {
+    //   apiKey: 'AIzaSyAXma9S9x19lXpu9GpYvHtqHt5zVNeUmTE',
+    //   authDomain: 'gims-51260.firebaseapp.com',
+    //   projectId: 'gims-51260',
+    //   storageBucket: 'gims-51260.appspot.com',
+    //   messagingSenderId: '785581755519',
+    //   appId: '1:785581755519:web:038b2279e6fbf7d6dc434a'
+    // }
+
+    // new
+
     config: {
       apiKey: 'AIzaSyAXma9S9x19lXpu9GpYvHtqHt5zVNeUmTE',
       authDomain: 'gims-51260.firebaseapp.com',
       projectId: 'gims-51260',
       storageBucket: 'gims-51260.appspot.com',
       messagingSenderId: '785581755519',
-      appId: '1:785581755519:web:038b2279e6fbf7d6dc434a'
+      appId: '1:785581755519:web:f94f1f9b47c452dfdc434a'
     }
   }
-})
+} as any)

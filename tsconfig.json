@@ -5,7 +5,13 @@
     "verbatimModuleSyntax": false,
     "baseUrl": "./",
     "paths": {
+      "~/utils/*": ["utils/*"],
+      "~/repos/*": ["repos/*"],
+      "~/apollo/*": ["apollo/*"],
+      "~/types/*": ["types/*"],
       "~/src/*": ["src/*"],
+      "~/helpers/*": ["helpers/*"],
+      "~/plugins/*": ["plugins/*"]
     }
   }
 }
