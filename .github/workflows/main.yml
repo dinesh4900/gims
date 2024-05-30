@@ -21,6 +21,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
+          pwd
           PID=$(lsof -t -i:3000) && kill -9 $PID || echo "No process running on port 3000"  # Replace 3000 with your port number
 
     - name: Deploy new application
