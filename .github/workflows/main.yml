@@ -46,14 +46,8 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           echo "SSH login successful. User: $USER"
-          cd ~/gims-v2/client/gims
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-          sudo node -v
-          nvm use 20
-          rm yarn.lock
-          yarn
-          yarn build
+          cd ~/gims-v2/client
+          ./deploy.sh
 
     - name: Start new application
       uses: appleboy/ssh-action@master
