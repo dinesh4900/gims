@@ -32,7 +32,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd /gims-v2/client/gims
+          cd ~/gims-v2/client/gims
           nvm use 20
           rm yarn.lock
           yarn
