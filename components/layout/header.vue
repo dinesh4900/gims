@@ -28,6 +28,7 @@
           >{{ item.name }}</a
         >
       </div>
+      <button type="button" @click="handleLogout">Sign out</button>
     </nav>
     <Dialog
       class="lg:hidden"
@@ -79,6 +80,7 @@
 import { ref } from 'vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { Dialog, DialogPanel } from '@headlessui/vue'
+import { signOut } from 'firebase/auth'
 
 const navigation = [
   { name: 'Product', href: '/products' },
@@ -97,4 +99,20 @@ const mobileNavigation = [
 ]
 
 const mobileMenuOpen = ref(false)
+
+const auth = useFirebaseAuth()
+const { onLogout } = useApollo()
+
+const handleLogout = () => {
+  signOut(auth as any).then(
+    (_success) => {
+      onLogout()
+      localStorage.clear()
+      navigateTo('/')
+    },
+    (error) => {
+      console.error('[signOut-error]', error)
+    }
+  )
+}
 </script>

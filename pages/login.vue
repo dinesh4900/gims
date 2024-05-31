@@ -39,16 +39,21 @@ import { signInWithEmailAndPassword, type Auth } from 'firebase/auth'
 import { reactive } from 'vue'
 import Input from '../components/form/input.vue'
 
-const form = reactive({ email: '', password: '' })
+definePageMeta({
+  layout: 'dynamic'
+})
+
 const router = useRouter()
 const { onLogin } = useApollo()
 
 const auth = useFirebaseAuth()
 const user = useCurrentUser()
 
+const form = reactive({ email: '', password: '' })
+
 watch(user, (val) => {
   if (val?.email) {
-    router.push('/')
+    router.push('/admin')
   } else if (!val?.email) {
     router.push('/login')
   }
@@ -62,7 +67,7 @@ const handleLogin = async () => {
     accessToken.value = tokenId
     if (tokenId) {
       onLogin(tokenId)
-      router.push('/')
+      router.push('/admin')
     }
   } catch (error: any) {
     if (

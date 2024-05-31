@@ -54,6 +54,7 @@ export default defineNuxtConfig({
   components: [
     {
       global: true,
+      dirs: ['~/components/', '~/components/persons'],
       path: '~/components',
       extensions: ['.vue'],
       pathPrefix: false

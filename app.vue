@@ -37,18 +37,4 @@ onMounted(() => {
     })
   })
 })
-
-watch(
-  user,
-  async () => {
-    const _user = await getCurrentUser()
-    if (!_user) {
-      router.push('/login')
-    } else if (_user) {
-      const { refetch: fetchuser } = useUser()
-      await fetchuser()
-    }
-  },
-  { immediate: true }
-)
 </script>
