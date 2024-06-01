@@ -59,6 +59,7 @@ import {
   ArrowLongLeftIcon,
   ArrowLongRightIcon
 } from '@heroicons/vue/24/outline'
+import Button from '../form/pagination.vue'
 
 const props = defineProps({
   totalCount: {

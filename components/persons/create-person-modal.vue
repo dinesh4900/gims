@@ -8,25 +8,19 @@
 
     <template #content>
       <div class="flex gap-4">
-        <Vselect
-          v-model="form.datss"
-          :items="[]"
-          :placeholder="`$clknlkcnlkc`"
-        />
         <Input v-model="form.name" label="Name" placeholder="Enter Name" />
-        <Input v-model="form.email" label="Email" placeholder="Enter email" />
-      </div>
-      <div class="flex gap-4">
         <Input
           v-model="form.mobile"
           label="Mobile"
           placeholder="Enter Mobile"
         />
-        <UserSelect
-          :id="'residenceCountry'"
-          v-model="form.datss"
-          :name="'residenceCountry'"
-          :default-value="form.datss"
+      </div>
+      <div class="flex gap-4">
+        <Input v-model="form.email" label="Email" placeholder="Enter email" />
+        <Input
+          v-model="form.password"
+          label="Password"
+          placeholder="Enter Password"
         />
       </div>
     </template>
@@ -58,8 +52,6 @@ import { usePersonsRepo } from '~/repos/persons'
 import Dialog from '../../components/common/dialog.vue'
 import Input from '../../components/form/input.vue'
 import Button from '../../components/form/button.vue'
-import UserSelect from '../../components/common/user-select.vue'
-import Vselect from '../../components/form/VSelect.vue'
 const props = defineProps({
   isModalOpen: {
     type: Boolean,
@@ -75,11 +67,8 @@ const form = reactive({
   name: '',
   mobile: '',
   email: '',
-  password: '',
-  datss: {}
+  password: ''
 })
-
-const datss = ref()
 
 const emit = defineEmits(['update:openEvent'])
 
@@ -96,9 +85,8 @@ const handleSave = async () => {
     email: form.email,
     password: form.password
   }
+  // todo
   const response = await create({ payload })
-
-  console.log(response, '## response 34')
   emit('update:openEvent', false)
 }
 </script>

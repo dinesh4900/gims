@@ -1,5 +1,9 @@
-import { mutateGql } from '~/apollo/config/client'
-import { createContact } from '~/apollo/graphql/contact'
+import { mutateGql, queryGql } from '~/apollo/config/client'
+import {
+  createContact,
+  findContactById,
+  findManyContacts
+} from '~/apollo/graphql/contact'
 
 export const useContactRepo = () => {
   return {
@@ -17,6 +21,24 @@ export const useContactRepo = () => {
       } catch (e) {
         console.log('error', e)
       }
+    },
+    findAll: async (variable: any) => {
+      const result = await queryGql<any, any>(
+        GqlEndpoint.Gims,
+        findManyContacts,
+        variable
+      )
+      return { result }
+    },
+    findOne: async (id: string) => {
+      const result = await queryGql<any, any>(
+        GqlEndpoint.Gims,
+        findContactById,
+        {
+          id
+        }
+      )
+      return { result }
     }
   }
 }

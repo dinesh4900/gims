@@ -1,5 +1,9 @@
-import { createServiceRequirement } from '../apollo/graphql/services'
-import { mutateGql } from '~/apollo/config/client'
+import {
+  createServiceRequirement,
+  findManyServiceRequirements,
+  findServiceRequirementById
+} from '../apollo/graphql/services'
+import { mutateGql, queryGql } from '~/apollo/config/client'
 
 export const useServicesRepo = () => {
   return {
@@ -17,6 +21,24 @@ export const useServicesRepo = () => {
       } catch (e) {
         console.log('error', e)
       }
+    },
+    findAll: async (variable: any) => {
+      const result = await queryGql<any, any>(
+        GqlEndpoint.Gims,
+        findManyServiceRequirements,
+        variable
+      )
+      return { result }
+    },
+    findOne: async (id: string) => {
+      const result = await queryGql<any, any>(
+        GqlEndpoint.Gims,
+        findServiceRequirementById,
+        {
+          id
+        }
+      )
+      return { result }
     }
   }
 }

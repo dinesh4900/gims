@@ -8,3 +8,35 @@ export const createServiceRequirement = gql`
     }
   }
 `
+export const findManyServiceRequirements = gql`
+  query findManyServiceRequirements($paging: PagingInputDto) {
+    findManyServiceRequirements(pagingInput: $paging) {
+      count
+      items {
+        _id
+        name
+        email
+        mobile
+        companyName
+        designation
+        address
+        fieldOfService
+        requirements
+      }
+    }
+  }
+`
+export const findServiceRequirementById = gql`
+  query findServiceRequirementById($id: String!) {
+    findServiceRequirementById(_id: $id) {
+      name
+      email
+      mobile
+      address
+      fieldOfService
+      companyName
+      requirements
+      designation
+    }
+  }
+`

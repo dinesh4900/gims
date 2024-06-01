@@ -4,7 +4,7 @@
     :value="defaultValue"
     :items="selectOptions"
     :name="name"
-    :placeholder="`${startCase(name)}`"
+    placeholder="Select employee"
     :multiple="multiple"
     :errors="errors"
     @change="emit('change', $event)"
@@ -15,17 +15,18 @@
 <script setup lang="ts">
 import Vselect from '../../components/form/VSelect.vue'
 import { startCase } from 'lodash'
+import { PropType } from 'vue'
 import { usePersonsRepo } from '~/repos/persons'
 
 const props = defineProps({
   errors: { type: Object, required: false, default: () => {} },
   modelValue: {
-    type: [Object, Array, String],
+    type: Object as PropType<any>,
     required: true,
     default: null
   },
   defaultValue: {
-    type: [Object, Array, String],
+    type: Object as PropType<any>,
     required: true,
     default: null
   },
@@ -64,8 +65,9 @@ const { findAll } = usePersonsRepo()
 const { result } = await findAll({})
 
 const selectOptions = computed(() => {
+  console.log(result?.data?.findManyPersons, '## find all persons')
   return (
-    result?.data?.findManyPersons?.map((item: any) => {
+    result?.data?.findManyPersons?.items?.map((item: any) => {
       return {
         key: item?._id,
         name: item?.name,

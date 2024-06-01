@@ -1,23 +1,23 @@
 import { mutateGql, queryGql } from '~/apollo/config/client'
 import {
-  createPerson,
-  findManyPersons,
-  findOnePerson,
-  updatePerson
-} from '~/apollo/graphql/persons'
+  createTask,
+  findManyTasks,
+  findTaskById,
+  updateTask
+} from '~/apollo/graphql/tasks'
 
-export const usePersonsRepo = () => {
+export const useTasksRepo = () => {
   return {
     findAll: async (variable: any) => {
       const result = await queryGql<any, any>(
         GqlEndpoint.Gims,
-        findManyPersons,
+        findManyTasks,
         variable
       )
       return { result }
     },
     findOne: async (id: string) => {
-      const result = await queryGql<any, any>(GqlEndpoint.Gims, findOnePerson, {
+      const result = await queryGql<any, any>(GqlEndpoint.Gims, findTaskById, {
         id
       })
       return { result }
@@ -26,7 +26,7 @@ export const usePersonsRepo = () => {
       try {
         const { data, errors } = await mutateGql(
           GqlEndpoint.Gims,
-          updatePerson,
+          updateTask,
           payload
         )
         if (errors) {
@@ -41,7 +41,7 @@ export const usePersonsRepo = () => {
       try {
         const { data, errors } = await mutateGql(
           GqlEndpoint.Gims,
-          createPerson,
+          createTask,
           payload
         )
         if (errors) {
