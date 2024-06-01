@@ -28,7 +28,13 @@
           >{{ item.name }}</a
         >
       </div>
-      <button type="button" @click="handleLogout">Sign out</button>
+      <div
+        v-if="token"
+        class="justify-end w-full inline-flex items-center lg:w-auto"
+        @click="handleLogout"
+      >
+        Logout
+      </div>
     </nav>
     <Dialog
       class="lg:hidden"
@@ -98,6 +104,7 @@ const mobileNavigation = [
   { name: 'Privacy Policy', href: '/privacy' }
 ]
 
+const token = useCookie('apollo:default.token')
 const mobileMenuOpen = ref(false)
 
 const auth = useFirebaseAuth()

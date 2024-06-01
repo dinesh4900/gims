@@ -89,6 +89,11 @@
 <script setup lang="ts">
 import { useContactRepo } from '~/repos/contact'
 import Pagination from '../../components/form/pagination.vue'
+import { useRouter } from 'vue-router'
+import { useCurrentUser } from 'vuefire'
+
+const user = useCurrentUser()
+const router = useRouter()
 
 const personsData = ref<any>([])
 const totalCount = ref<number>(10)
@@ -112,6 +117,14 @@ const changePageFilter = async (page: number) => {
 
 onMounted(() => {
   fetchAllPersons()
+})
+
+watch(user, (val) => {
+  if (val?.email) {
+    router.push('/admin')
+  } else if (!val?.email) {
+    router.push('/login')
+  }
 })
 
 const headers = ['Name', 'Email', 'Mobile number', 'Description']

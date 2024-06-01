@@ -37,16 +37,6 @@
                     class="'relative px-6 py-4 -mx-px font-semibold transition duration-150 delay-75 whitespace-nowrap'"
                   >
                     {{ person.name }}
-                    <div
-                      class="absolute inset-y-0 right-0 flex items-center justify-end flex-initial w-full h-full duration-150 ease-in-out origin-right scale-0 group-hover:scale-95 whitespace-nowrap"
-                      @click="handleUpdateUser(person._id)"
-                    >
-                      <div
-                        class="inline-flex items-center py-0.5 pr-2 m-2 text-xs font-semibold text-purple-600 bg-purple-100 rounded cursor-pointer pl-3 border border-purple-200"
-                      >
-                        Edit<ArrowLongRightIcon class="w-5 h-5 text-center" />
-                      </div>
-                    </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 font-normal whitespace-nowrap">
@@ -97,6 +87,12 @@ import { usePersonsRepo } from '~/repos/persons'
 import Button from '../../components/form/button.vue'
 import Pagination from '../../components/form/pagination.vue'
 
+import { useRouter } from 'vue-router'
+import { useCurrentUser } from 'vuefire'
+
+const user = useCurrentUser()
+const router = useRouter()
+
 const personsData = ref<any>([])
 const openCreateModal = ref(false)
 const openUpdateModal = ref(false)
@@ -125,6 +121,14 @@ const handleUpdateUser = (id: string) => {
 const handleCreateUser = () => {
   openCreateModal.value = true
 }
+
+watch(user, (val) => {
+  if (val?.email) {
+    router.push('/admin')
+  } else if (!val?.email) {
+    router.push('/login')
+  }
+})
 
 const handleCreateModal = (event: boolean) => {
   openCreateModal.value = event
