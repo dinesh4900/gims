@@ -124,7 +124,7 @@ const handleCreateUser = () => {
 
 watch(user, (val) => {
   if (val?.email) {
-    router.push('/admin')
+    router.push('/admin/persons')
   } else if (!val?.email) {
     router.push('/login')
   }

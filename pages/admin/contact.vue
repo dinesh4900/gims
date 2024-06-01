@@ -121,7 +121,7 @@ onMounted(() => {
 
 watch(user, (val) => {
   if (val?.email) {
-    router.push('/admin')
+    router.push('/admin/contact')
   } else if (!val?.email) {
     router.push('/login')
   }

@@ -65,7 +65,7 @@ import { defineComponent, h } from 'vue'
 const navigation = {
   explore: [
     { name: 'Products', href: '/products' },
-    { name: 'Services', href: '/services' },
+    { name: 'Services', href: '/services-offered' },
     { name: 'Why Choose Us', href: '/why-us' }
   ],
   company: [
