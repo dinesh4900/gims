@@ -7,17 +7,23 @@
     <template #title>Create Person</template>
 
     <template #content>
-      <div class="flex gap-4">
-        <Input v-model="form.name" label="Name" placeholder="Enter Name" />
+      <div class="flex flex-wrap md:flex-nowrap gap-4">
+        <Input
+          v-model="form.name"
+          label="Name"
+          placeholder="Enter Name"
+          class="w-full md:w-auto"
+        />
         <Input
           v-model="form.mobile"
           label="Mobile"
           placeholder="Enter Mobile"
+          class="w-full md:w-auto"
         />
       </div>
     </template>
     <template #footer>
-      <div class="flex gap-4 w-full justify-between flex-wrap">
+      <div class="flex flex-wrap gap-4 w-full justify-between mt-4">
         <Button
           color="white"
           :disabled="props.loading"

@@ -7,17 +7,49 @@
     <template #title>Update Task</template>
 
     <template #content>
-      <div class="flex gap-4">
-        <Input v-model="form.dueDate" label="Name" placeholder="Enter Name" />
+      <div class="flex flex-wrap md:flex-nowrap gap-4">
+        <div class="w-full md:w-[262px] h-[56px]">
+          <Input
+            v-model="form.title"
+            label="Title"
+            placeholder="Enter title"
+            class="w-full"
+          />
+        </div>
+        <div class="w-full md:w-[262px]">
+          <VueDatePicker
+            v-model="form.dueDate"
+            :value="form.dueDate"
+            placeholder="Due Date"
+            :enable-time-picker="false"
+            format="dd/MM/yyyy"
+            :max-date="new Date()"
+            utc
+            auto-apply
+            :teleport="true"
+          />
+        </div>
+        <div class="w-full md:w-[262px]">
+          <EmployeeSelect
+            :id="'assignedTo'"
+            v-model="form.assignedTo"
+            :name="'assignedTo'"
+            :default-value="form.assignedTo"
+            class="w-full"
+          />
+        </div>
+      </div>
+      <div class="flex flex-wrap md:flex-nowrap gap-4 mt-4">
         <Input
           v-model="form.description"
-          label="Mobile"
-          placeholder="Enter Mobile"
+          label="Description"
+          placeholder="Enter description"
+          class="w-full"
         />
       </div>
     </template>
     <template #footer>
-      <div class="flex gap-4 w-full justify-between flex-wrap">
+      <div class="flex flex-wrap gap-4 w-full justify-between mt-4">
         <Button
           color="white"
           :disabled="props.loading"
@@ -40,11 +72,13 @@
 </template>
 
 <script setup lang="ts">
-import { usePersonsRepo } from '~/repos/persons'
 import Dialog from '../../components/common/dialog.vue'
 import Input from '../../components/form/input.vue'
 import Button from '../../components/form/button.vue'
 import { useTasksRepo } from '~/repos/tasks'
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+import EmployeeSelect from '../../components/common/employee-select.vue'
 
 const props = defineProps({
   isModalOpen: {
@@ -62,6 +96,7 @@ const props = defineProps({
 })
 
 const form = reactive({
+  title: '',
   assignedTo: {},
   description: '',
   dueDate: ''
@@ -72,7 +107,6 @@ const { update, findOne } = useTasksRepo()
 
 const fetchOnePerson = async () => {
   const dataResp = await findOne(taskId.value)
-
   const findOneData = dataResp?.result?.data?.findTaskById
   form.assignedTo = findOneData.assignedTo
   form.description = findOneData.description
@@ -81,7 +115,7 @@ const fetchOnePerson = async () => {
 
 watch(
   taskId,
-  (newVal) => {
+  () => {
     fetchOnePerson()
   },
   { immediate: true }

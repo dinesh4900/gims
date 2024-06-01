@@ -7,9 +7,16 @@
     <template #title>Create Task</template>
 
     <template #content>
-      <div class="flex gap-4">
-        <!-- TODO -- Date picker and assigned to -->
-        <div class="w-[262px] h-[56px]">
+      <div class="flex flex-wrap md:flex-nowrap gap-4">
+        <div class="w-full md:w-[262px] h-[56px]">
+          <Input
+            v-model="form.title"
+            label="Title"
+            placeholder="Enter title"
+            class="w-full"
+          />
+        </div>
+        <div class="w-full md:w-[262px]">
           <VueDatePicker
             v-model="form.dueDate"
             :value="form.dueDate"
@@ -22,25 +29,28 @@
             :teleport="true"
           />
         </div>
-        <EmployeeSelect
-          :id="'assignedTo'"
-          v-model="form.assignedTo"
-          :name="'assignedTo'"
-          :default-value="form.assignedTo"
-          class="w-[262px]"
-        />
+        <div class="w-full md:w-[262px]">
+          <EmployeeSelect
+            :id="'assignedTo'"
+            v-model="form.assignedTo"
+            :name="'assignedTo'"
+            :default-value="form.assignedTo"
+            class="w-full"
+          />
+        </div>
       </div>
-      <div class="flex gap-4">
+      <div class="flex flex-wrap md:flex-nowrap gap-4 mt-4">
         <!-- TODO - title -->
         <Input
           v-model="form.description"
           label="Description"
           placeholder="Enter description"
+          class="w-full"
         />
       </div>
     </template>
     <template #footer>
-      <div class="flex gap-4 w-full justify-between flex-wrap">
+      <div class="flex flex-wrap gap-4 w-full justify-between mt-4">
         <Button
           color="white"
           :disabled="props.loading"
@@ -83,6 +93,7 @@ const props = defineProps({
 })
 
 const form = reactive({
+  title: '',
   assignedTo: null as any,
   description: '',
   dueDate: ''
@@ -97,15 +108,16 @@ const updateOpenEvent = (e: boolean) => {
 const { create } = useTasksRepo()
 
 const handleSave = async () => {
-  // todo
   const payload = {
+    title: form.title,
+    description: form.description,
+    dueDate: form.dueDate,
+    status: TaskStatusEnum.Assigned,
     assignedTo: {
       _id: form.assignedTo?.key,
       email: form.assignedTo?.email,
       name: form.assignedTo?.name
-    },
-    description: form.description,
-    dueDate: form.dueDate
+    }
   }
   const response = await create({ payload })
   emit('update:openEvent', false)
