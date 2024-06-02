@@ -12,7 +12,7 @@
           </h2>
           <div class="text-center">
             <Button
-              color="purple"
+              color="blue"
               size="sm"
               class="!font-medium items-start"
               @click="handleOpenSubmitRequirements"
@@ -47,9 +47,8 @@
         </div>
       </div>
       <div class="mt-10 text-center">
-        =={{ openSubmitRequirements }}
         <Button
-          color="purple"
+          color="blue"
           size="sm"
           class="!font-medium items-start"
           @click="handleOpenSubmitRequirements"

@@ -20,7 +20,7 @@
       :class="[
         isUseCustomSelect
           ? 'customselect bg-white group relative min-h-[56px] w-fullcursor-pointer overflow-hidden'
-          : 'bg-white group relative min-h-[56px] w-full rounded-md border border-gray-200 focus-within:border-purple-600 focus-within:ring-inset focus-within:ring-1 focus-within:ring-purple-600 cursor-pointer overflow-hidden',
+          : 'bg-white group relative min-h-[56px] w-full rounded-md border border-gray-200 focus-within:border-blue-600 focus-within:ring-inset focus-within:ring-1 focus-within:ring-blue-600 cursor-pointer overflow-hidden',
         disabled ? 'opacity-25' : ''
       ]"
       :clearable="isUseCustomSelect ? clearable : undefined"
@@ -423,7 +423,7 @@ const handlers = (e: Event) => {
   &-option {
     @apply py-2 text-sm font-medium;
     &--selected {
-      @apply bg-purple-100 text-purple-700;
+      @apply bg-blue-100 text-blue-700;
     }
     &--highlight {
       @apply bg-gray-200 text-black font-bold;
@@ -516,7 +516,7 @@ const handlers = (e: Event) => {
       &-option {
         @apply py-2 text-sm font-medium;
         &--selected {
-          @apply bg-purple-100 text-purple-700;
+          @apply bg-blue-100 text-blue-700;
         }
         &--highlight {
           @apply bg-gray-200 text-black font-bold;

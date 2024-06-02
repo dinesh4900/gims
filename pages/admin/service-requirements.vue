@@ -10,7 +10,7 @@
             class="min-w-full overflow-x-auto overflow-y-auto bg-gray-100 rounded-md scrollbar--thin h-screen max-h-[calc(100vh-320px)] md:max-h-[calc(100vh-280px)] border border-gray-200"
           >
             <table class="min-w-full text-sm font-light text-left">
-              <thead class="sticky top-0 left-0 z-10">
+              <thead class="top-0 left-0 z-10">
                 <tr class="snap-x">
                   <th
                     v-for="(item, index) in headers"
@@ -33,17 +33,17 @@
                       class="'relative px-6 py-4 -mx-px font-semibold transition duration-150 delay-75 whitespace-nowrap'"
                     >
                       {{ person.name }}
-                      <div
+                      <!-- <div
                         class="absolute inset-y-0 right-0 flex items-center justify-end flex-initial w-full h-full duration-150 ease-in-out origin-right scale-0 group-hover:scale-95 whitespace-nowrap"
                       >
                         <div
-                          class="inline-flex items-center py-0.5 pr-2 m-2 text-xs font-semibold text-purple-600 bg-purple-100 rounded cursor-pointer pl-3 border border-purple-200"
+                          class="inline-flex items-center py-0.5 pr-2 m-2 text-xs font-semibold text-blue-600 bg-blue-100 rounded cursor-pointer pl-3 border border-blue-200"
                         >
                           Go to &nbsp;<ArrowLongRightIcon
                             class="w-5 h-5 text-center"
                           />
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </td>
                   <td class="px-6 py-4 font-normal whitespace-nowrap">

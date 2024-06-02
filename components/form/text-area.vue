@@ -5,7 +5,7 @@
     }}</label>
     <textarea
       v-model="value"
-      class="bg-gray-10 border border-gray-300 text-gray-900 text-sm rounded-md w-full block h-auto px-4 py-2 placeholder:text-gray-400 focus:outline-none font-medium appearance-none disabled:opacity-75 focus:border-purple-600 autofill:bg-white leading-6 focus-within:ring-1 focus-within:ring-purple-600 placeholder:capitalize"
+      class="bg-gray-10 border border-gray-300 text-gray-900 text-sm rounded-md w-full block h-auto px-4 py-2 placeholder:text-gray-400 focus:outline-none font-medium appearance-none disabled:opacity-75 focus:border-blue-600 autofill:bg-white leading-6 focus-within:ring-1 focus-within:ring-blue-600 placeholder:capitalize"
       :rows="rows"
       :cols="cols"
       :placeholder="placeholder"

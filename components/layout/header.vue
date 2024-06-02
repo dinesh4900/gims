@@ -30,7 +30,7 @@
       </div>
       <div
         v-if="token"
-        class="justify-end w-full inline-flex items-center lg:w-auto"
+        class="justify-end w-full inline-flex items-center lg:w-auto cursor-pointer"
         @click="handleLogout"
       >
         Logout

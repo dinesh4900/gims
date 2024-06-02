@@ -127,7 +127,7 @@
           </div>
           <div class="mt-8 flex justify-end">
             <Button
-              color="purple"
+              color="blue"
               size="sm"
               class="!font-medium items-start"
               @click="handleSubmitRequirements"
@@ -148,6 +148,9 @@ import {
   PhoneIcon
 } from '@heroicons/vue/24/outline'
 import { useContactRepo } from '~/repos/contact'
+import Button from '../../components/form/button.vue'
+import Input from '../../components/form/input.vue'
+import TextArea from '../../components/form/text-area.vue'
 
 const form = reactive({
   firstName: '',

@@ -6,7 +6,7 @@
       >
         <div class="overflow-x-auto">
           <table class="min-w-full text-sm font-light text-left">
-            <thead class="sticky top-0 left-0 z-10">
+            <thead class="top-0 left-0 z-10">
               <tr>
                 <th
                   v-for="(item, index) in headers"
@@ -24,7 +24,7 @@
                 :key="idx"
                 class="transition duration-150 delay-75 border border-gray-100 hover:rounded group hover:bg-gray-50"
               >
-                <td class="sticky top-0 z-0 -left-px min-w-[150px]">
+                <td class="top-0 z-0 -left-px min-w-[150px]">
                   <div
                     class="relative px-6 py-4 font-semibold transition duration-150 delay-75 whitespace-nowrap"
                   >
@@ -34,7 +34,7 @@
                       @click="handleUpdateTask(task._id)"
                     >
                       <div
-                        class="inline-flex items-center py-0.5 pr-2 m-2 text-xs font-semibold text-purple-600 bg-purple-100 rounded cursor-pointer pl-3 border border-purple-200"
+                        class="inline-flex items-center py-0.5 pr-2 m-2 text-xs font-semibold text-blue-600 bg-blue-100 rounded cursor-pointer pl-3 border border-blue-200"
                       >
                         Edit<ArrowLongRightIcon class="w-5 h-5 text-center" />
                       </div>

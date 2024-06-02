@@ -2,7 +2,7 @@
   <div class="w-full">
     <div
       :class="disabled ? 'pointer-events-none cursor-not-allowed' : ''"
-      class="relative w-full mb-2 overflow-hidden border border-gray-100 rounded-md cursor-pointer group h-14 focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600"
+      class="relative w-full mb-2 overflow-hidden border border-gray-100 rounded-md cursor-pointer group h-14 focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
     >
       <label
         :for="`${name}-${id}`"
@@ -39,7 +39,7 @@
         :value="modelValue"
         :placeholder="placeholder"
         :name="name"
-        class="z-10 block w-full h-full pt-6 pb-3 text-sm font-medium leading-6 rounded-md appearance-none placeholder:text-gray-400 focus:outline-none disabled:opacity-75 focus:border-purple-600 autofill:bg-white"
+        class="z-10 block w-full h-full pt-6 pb-3 text-sm font-medium leading-6 rounded-md appearance-none placeholder:text-gray-400 focus:outline-none disabled:opacity-75 focus:border-blue-600 autofill:bg-white"
         :class="[getIconClass(), disabled ? 'cursor-not-allowed' : '']"
         :required="required"
         :disabled="disabled"

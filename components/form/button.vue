@@ -46,44 +46,42 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['click']);
-const handleClick = () => [emit('click')];
+const emit = defineEmits(['click'])
+const handleClick = () => [emit('click')]
 
 const props = defineProps({
   type: {
     type: String as PropType<'button' | 'submit' | 'reset'>,
-    default: 'button',
+    default: 'button'
   },
   size: {
     type: String as PropType<'sm' | 'md' | 'lg'>,
-    default: 'md',
+    default: 'md'
   },
   color: {
-    type: String as PropType<
-      'danger' | 'success' | 'black' | 'white' | 'purple'
-    >,
-    default: 'purple',
+    type: String as PropType<'danger' | 'success' | 'black' | 'white' | 'blue'>,
+    default: 'blue'
   },
   iconType: {
     type: String as PropType<'startIcon' | 'endIcon' | 'icon'>,
-    default: '',
+    default: ''
   },
   icon: {
     type: [String, Object, Function],
-    default: '',
+    default: ''
   },
   loading: Boolean,
-  disabled: Boolean,
-});
+  disabled: Boolean
+})
 
 const sizeClasses = reactive({
   sm: 'text-sm font-medium', // 32
   md: 'text-base font-semibold', // 40
-  lg: 'text-base font-bold', // 52
-});
+  lg: 'text-base font-bold' // 52
+})
 
 const btnClass = computed(() => {
-  const btnDisabled = props.disabled;
+  const btnDisabled = props.disabled
   const btnColor = {
     black: btnDisabled
       ? 'bg-opacity-60 cursor-not-allowed text-gray-200 bg-gray-800'
@@ -97,35 +95,35 @@ const btnClass = computed(() => {
     success: btnDisabled
       ? 'bg-opacity-60 cursor-not-allowed text-gray-200 bg-green-600'
       : 'bg-green-600 hover:bg-green-700 active:bg-green-600 text-white cursor-pointer active:shadow-green-500/50',
-    purple: btnDisabled
-      ? 'bg-opacity-60 cursor-not-allowed text-gray-200 bg-purple-500'
-      : 'bg-purple-700 hover:bg-purple-800 active:bg-purple-700 text-white cursor-pointer active:shadow-purple-500/50',
-  };
+    blue: btnDisabled
+      ? 'bg-opacity-60 cursor-not-allowed text-gray-200 bg-blue-500'
+      : 'bg-blue-700 hover:bg-blue-800 active:bg-blue-700 text-white cursor-pointer active:shadow-blue-500/50'
+  }
 
   const iconClasses = {
     lg: props.iconType === 'icon' ? 'p-3.5' : 'px-6 py-3.5',
     md: props.iconType === 'icon' ? 'p-2' : 'px-4 py-2',
-    sm: props.iconType === 'icon' ? 'p-1.5' : 'px-4 py-1.5',
-  };
+    sm: props.iconType === 'icon' ? 'p-1.5' : 'px-4 py-1.5'
+  }
 
-  const colorClass = btnColor[props.color] || '';
-  const sizeClass = sizeClasses[props.size] || '';
-  const typeClass = iconClasses[props.size] || '';
+  const colorClass = btnColor[props.color] || ''
+  const sizeClass = sizeClasses[props.size] || ''
+  const typeClass = iconClasses[props.size] || ''
   const disabledClass =
     props.disabled === true
       ? 'active:!translate-y-0 active:!scale-100 active:!shadow-none'
-      : '';
-  return `${colorClass} ${sizeClass} ${typeClass} ${disabledClass}`;
-});
+      : ''
+  return `${colorClass} ${sizeClass} ${typeClass} ${disabledClass}`
+})
 
 const iconWidthClasses = reactive({
   sm: 'w-5 h-5 text-current',
   md: 'w-6 h-6 text-current',
-  lg: 'w-6 h-6 text-current',
-});
+  lg: 'w-6 h-6 text-current'
+})
 
 const iconWidth = computed(() => {
-  const iconClass = iconWidthClasses[props.size] || '';
-  return iconClass;
-});
+  const iconClass = iconWidthClasses[props.size] || ''
+  return iconClass
+})
 </script>

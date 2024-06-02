@@ -25,7 +25,7 @@
           i == '…'
             ? 'select-none pointer-events-none'
             : currentPage == i
-            ? '!bg-purple-100 text-purple-600 ring-1 ring-purple-600 ring-inset ring-current'
+            ? '!bg-blue-100 text-blue-600 ring-1 ring-blue-600 ring-inset ring-current'
             : '',
           'rounded-none !px-2.5'
         ]"

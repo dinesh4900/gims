@@ -21,7 +21,7 @@
       />
       <div class="ml-auto text-right">
         <Button
-          color="purple"
+          color="blue"
           size="lg"
           :disabled="!(form.email && form.password)"
           class="tracking-wider"

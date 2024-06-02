@@ -8,6 +8,13 @@ export const findManyTasks = gql`
         dueDate
         description
         status
+        serviceRequirement {
+          _id
+          name
+          email
+          fieldOfService
+          requirements
+        }
         assignedTo {
           _id
           email
@@ -27,6 +34,13 @@ export const findTaskById = gql`
         _id
         name
       }
+      serviceRequirement {
+        _id
+        name
+        email
+        fieldOfService
+        requirements
+      }
       title
       status
       dueDate
@@ -43,8 +57,8 @@ export const createTask = gql`
 `
 
 export const updateTask = gql`
-  mutation updateTask($input: UpdateTaskInputDto!) {
-    updateTask(input: $input) {
+  mutation updateTask($payload: UpdateTaskInputDto!) {
+    updateTask(input: $payload) {
       _id
     }
   }

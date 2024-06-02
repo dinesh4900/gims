@@ -8,6 +8,13 @@ export const findAllPersonTasks = gql`
         status
         dueDate
         description
+        serviceRequirement {
+          _id
+          name
+          email
+          fieldOfService
+          requirements
+        }
       }
     }
   }

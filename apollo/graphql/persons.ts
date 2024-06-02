@@ -24,6 +24,7 @@ export const findManyPersons = gql`
         name
         email
         mobile
+        password
       }
     }
   }

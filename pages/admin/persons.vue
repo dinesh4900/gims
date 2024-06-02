@@ -4,7 +4,7 @@
       <div class="flex justify-between mb-6">
         <h2 class="text-lg font-semibold">Employees</h2>
         <Button
-          color="purple"
+          color="blue"
           size="md"
           class="tracking-wider"
           @click="handleCreateUser"
@@ -48,6 +48,9 @@
                 </td>
                 <td class="px-6 py-4 font-normal whitespace-nowrap">
                   {{ person.mobile }}
+                </td>
+                <td class="px-6 py-4 font-normal whitespace-nowrap">
+                  {{ person.password }}
                 </td>
               </tr>
             </tbody>
@@ -149,5 +152,5 @@ const changePageFilter = async (page: number) => {
   await fetchAllPersons()
 }
 
-const headers = ['Name', 'Email', 'Mobile']
+const headers = ['Name', 'Email', 'Mobile', 'Password']
 </script>
