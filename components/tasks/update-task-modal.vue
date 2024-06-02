@@ -55,6 +55,7 @@
           :disabled="props.loading"
           :loading="props.loading"
           :class="props.loading ? 'cursor-wait' : ''"
+          @click="handleEvent(false)"
         >
           Cancel
         </Button>
@@ -97,7 +98,7 @@ const props = defineProps({
 
 const form = reactive({
   title: '',
-  assignedTo: {},
+  assignedTo: null as any,
   description: '',
   dueDate: ''
 })
@@ -108,6 +109,7 @@ const { update, findOne } = useTasksRepo()
 const fetchOnePerson = async () => {
   const dataResp = await findOne(taskId.value)
   const findOneData = dataResp?.result?.data?.findTaskById
+  form.title = findOneData.title
   form.assignedTo = findOneData.assignedTo
   form.description = findOneData.description
   form.dueDate = findOneData.dueDate
@@ -130,10 +132,15 @@ const updateOpenEvent = (e: boolean) => {
 const handleSave = async () => {
   const payload = {
     _id: taskId.value,
-    name: form.dueDate,
-    mobile: form.description
+    title: form.title,
+    dueDate: form.dueDate,
+    description: form.description,
+    assignedTo: form.assignedTo
   }
   await update({ payload })
   emit('update:openEvent', false)
+}
+const handleEvent = (e: boolean) => {
+  emit('update:openEvent', e)
 }
 </script>

@@ -3,6 +3,9 @@ export const findAllPersonTasks = gql`
     findAllPersonTasks(pagingInput: $paging) {
       count
       items {
+        _id
+        title
+        status
         dueDate
         description
       }

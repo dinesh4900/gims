@@ -1,14 +1,17 @@
 <template>
   <div class="bg-gray-50 p-4 sm:p-6 h-[calc(100vh-64px)] scrollbar-hide">
     <div class="w-full max-w-6xl mx-auto">
-      <Button
-        color="purple"
-        size="lg"
-        class="tracking-wider"
-        @click="handleCreateUser"
-      >
-        Create Task
-      </Button>
+      <div class="flex justify-end mb-6">
+        <Button
+          color="purple"
+          size="md"
+          class="tracking-wider"
+          @click="handleCreateUser"
+        >
+          Create Task
+        </Button>
+      </div>
+
       <div
         class="p-2 pb-0 bg-white rounded-md shadow-md md:px-4 md:pt-4 shadow-gray-100"
       >
@@ -28,7 +31,7 @@
             </thead>
             <tbody class="bg-white">
               <tr
-                v-for="(person, idx) in personsData"
+                v-for="(task, idx) in taskData"
                 :key="idx"
                 class="transition duration-150 delay-75 border border-gray-100 hover:rounded group hover:bg-gray-50"
               >
@@ -36,10 +39,10 @@
                   <div
                     class="relative px-6 py-4 font-semibold transition duration-150 delay-75 whitespace-nowrap"
                   >
-                    {{ person.assignedTo?.name }}
+                    {{ task.title }}
                     <div
                       class="absolute inset-y-0 right-0 flex items-center justify-end flex-initial w-full h-full duration-150 ease-in-out origin-right scale-0 group-hover:scale-95 whitespace-nowrap"
-                      @click="handleUpdateUser(person._id)"
+                      @click="handleUpdateUser(task._id)"
                     >
                       <div
                         class="inline-flex items-center py-0.5 pr-2 m-2 text-xs font-semibold text-purple-600 bg-purple-100 rounded cursor-pointer pl-3 border border-purple-200"
@@ -50,10 +53,13 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 font-normal whitespace-nowrap">
-                  {{ getFormattedDate(person.dueDate) }}
+                  {{ task.assignedTo?.name }}
                 </td>
                 <td class="px-6 py-4 font-normal whitespace-nowrap">
-                  {{ person.description }}
+                  {{ getFormattedDate(task.dueDate) }}
+                </td>
+                <td class="px-6 py-4 font-normal whitespace-nowrap">
+                  {{ task.description }}
                 </td>
               </tr>
             </tbody>
@@ -87,7 +93,7 @@
   />
   <UpdateTaskModal
     :is-modal-open="openUpdateModal"
-    :person-id="personId"
+    :task-id="taskId"
     @update:open-event="handleUpdateModal"
   />
 </template>
@@ -98,6 +104,7 @@ import { useTasksRepo } from '~/repos/tasks'
 import UpdateTaskModal from '../../components/tasks/update-task-modal.vue'
 import CreateTaskModal from '../../components/tasks/create-task-modal.vue'
 import Pagination from '../../components/form/pagination.vue'
+import { ArrowLongRightIcon } from '@heroicons/vue/24/solid'
 
 import { useRouter } from 'vue-router'
 import { useCurrentUser } from 'vuefire'
@@ -105,10 +112,10 @@ import { useCurrentUser } from 'vuefire'
 const user = useCurrentUser()
 const router = useRouter()
 
-const personsData = ref<any>([])
+const taskData = ref<any>([])
 const openCreateModal = ref(false)
 const openUpdateModal = ref(false)
-const personId = ref('')
+const taskId = ref('')
 
 const totalCount = ref<number>(10)
 const limit = ref<number>(10)
@@ -116,13 +123,13 @@ const offset = ref<number>(0)
 
 const { findAll } = useTasksRepo()
 
-const fetchAllPersons = async () => {
+const fetchAllTasks = async () => {
   const response = await findAll({})
-  personsData.value = response.result?.data?.findManyTasks?.items as any
+  taskData.value = response.result?.data?.findManyTasks?.items as any
 }
 
 onMounted(() => {
-  fetchAllPersons()
+  fetchAllTasks()
 })
 
 watch(user, (val) => {
@@ -134,7 +141,7 @@ watch(user, (val) => {
 })
 
 const handleUpdateUser = (id: string) => {
-  personId.value = id
+  taskId.value = id
   openUpdateModal.value = true
 }
 
@@ -144,18 +151,18 @@ const handleCreateUser = () => {
 
 const handleCreateModal = (event: boolean) => {
   openCreateModal.value = event
-  fetchAllPersons()
+  fetchAllTasks()
 }
 
 const handleUpdateModal = (event: boolean) => {
   openUpdateModal.value = event
-  fetchAllPersons()
+  fetchAllTasks()
 }
 
 const changePageFilter = async (page: number) => {
   offset.value = page
-  await fetchAllPersons()
+  await fetchAllTasks()
 }
 
-const headers = ['Assigned to', 'Date', 'Descrption']
+const headers = ['Title', 'Assigned to', 'Date', 'Descrption']
 </script>

@@ -24,11 +24,9 @@ export const useTasksRepo = () => {
     },
     update: async (payload: any) => {
       try {
-        const { data, errors } = await mutateGql(
-          GqlEndpoint.Gims,
-          updateTask,
+        const { data, errors } = await mutateGql(GqlEndpoint.Gims, updateTask, {
           payload
-        )
+        })
         if (errors) {
           console.log('error', errors)
         }

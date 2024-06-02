@@ -1,14 +1,18 @@
 <template>
   <div class="bg-gray-50 p-4 sm:p-6 h-[calc(100vh-64px)] scrollbar-hide">
     <div class="w-full max-w-6xl mx-auto">
-      <Button
-        color="purple"
-        size="lg"
-        class="tracking-wider"
-        @click="handleCreateUser"
-      >
-        Create User
-      </Button>
+      <div class="flex justify-between mb-6">
+        <h2 class="text-lg font-semibold">Employees</h2>
+        <Button
+          color="purple"
+          size="md"
+          class="tracking-wider"
+          @click="handleCreateUser"
+        >
+          Create User
+        </Button>
+      </div>
+
       <div
         class="p-2 pb-0 bg-white rounded-md shadow-md md:px-4 md:pt-4 shadow-gray-100"
       >

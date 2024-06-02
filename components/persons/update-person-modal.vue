@@ -29,6 +29,7 @@
           :disabled="props.loading"
           :loading="props.loading"
           :class="props.loading ? 'cursor-wait' : ''"
+          @click="handleEvent(false)"
         >
           Cancel
         </Button>
@@ -107,5 +108,9 @@ const handleSave = async () => {
   }
   await update({ payload })
   emit('update:openEvent', false)
+}
+
+const handleEvent = (e: boolean) => {
+  emit('update:openEvent', e)
 }
 </script>

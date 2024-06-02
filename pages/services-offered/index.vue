@@ -47,6 +47,7 @@
         </div>
       </div>
       <div class="mt-10 text-center">
+        =={{ openSubmitRequirements }}
         <Button
           color="purple"
           size="sm"
@@ -65,11 +66,14 @@
 </template>
 
 <script setup lang="ts">
+import Button from '../../components/form/button.vue'
+
 const openSubmitRequirements = ref(false)
 
 const handleOpenSubmitRequirements = () => {
   openSubmitRequirements.value = true
 }
+
 const products = [
   {
     id: 1,

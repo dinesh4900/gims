@@ -1,54 +1,29 @@
+import { values } from 'lodash';
 <template>
   <Dialog
     :open-event="props.isModalOpen"
     size="md"
     @update:open-event="updateOpenEvent($event)"
   >
-    <template #title>Create Task</template>
+    <template #title>Update Task</template>
 
     <template #content>
       <div class="flex flex-wrap md:flex-nowrap gap-4">
         <div class="w-full md:w-[262px] h-[56px]">
-          <Input
-            v-model="form.title"
-            label="Title"
-            placeholder="Enter title"
+          <Vselect
+            v-model="form.status"
+            :value="form.status"
+            :items="statusOptions"
+            :name="'status'"
+            :placeholder="'Status'"
+            :is-start-case-text="true"
             class="w-full"
           />
         </div>
-        <div class="w-full md:w-[262px]">
-          <VueDatePicker
-            v-model="form.dueDate"
-            :value="form.dueDate"
-            placeholder="Due Date"
-            :enable-time-picker="false"
-            format="dd/MM/yyyy"
-            :max-date="new Date()"
-            utc
-            auto-apply
-            :teleport="true"
-          />
-        </div>
-        <div class="w-full md:w-[262px]">
-          <EmployeeSelect
-            :id="'assignedTo'"
-            v-model="form.assignedTo"
-            :name="'assignedTo'"
-            :default-value="form.assignedTo"
-            class="w-full"
-          />
-        </div>
-      </div>
-      <div class="flex flex-wrap md:flex-nowrap gap-4 mt-4">
-        <Input
-          v-model="form.description"
-          label="Description"
-          placeholder="Enter description"
-          class="w-full"
-        />
       </div>
     </template>
     <template #footer>
+      {{ taskId }}
       <div class="flex flex-wrap gap-4 w-full justify-between mt-4">
         <Button
           color="white"
@@ -74,12 +49,12 @@
 
 <script setup lang="ts">
 import Dialog from '../../components/common/dialog.vue'
-import EmployeeSelect from '../../components/common/employee-select.vue'
-import Input from '../../components/form/input.vue'
+import Vselect from '../../components/form/VSelect.vue'
 import Button from '../../components/form/button.vue'
 import { useTasksRepo } from '~/repos/tasks'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import EmployeeSelect from '../../components/common/employee-select.vue'
 
 const props = defineProps({
   isModalOpen: {
@@ -89,15 +64,36 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  taskId: {
+    type: String,
+    default: ''
   }
 })
 
 const form = reactive({
-  title: '',
-  assignedTo: null as any,
-  description: '',
-  dueDate: ''
+  status: null as any
 })
+
+const { taskId } = toRefs(props)
+const { update, findOne } = useTasksRepo()
+
+const fetchOneTask = async () => {
+  const dataResp = await findOne(taskId.value)
+  const findOneData = dataResp?.result?.data?.findTaskById
+  console.log(findOneData, '## findOneData')
+  form.status = findOneData.status
+}
+
+watch(
+  taskId,
+  () => {
+    fetchOneTask()
+  },
+  { immediate: true }
+)
+
+const statusOptions = Object.values(TaskStatusEnum)
 
 const emit = defineEmits(['update:openEvent'])
 
@@ -105,24 +101,15 @@ const updateOpenEvent = (e: boolean) => {
   emit('update:openEvent', e)
 }
 
-const { create } = useTasksRepo()
-
 const handleSave = async () => {
-  const payload = {
-    title: form.title,
-    description: form.description,
-    dueDate: form.dueDate,
-    status: TaskStatusEnum.Assigned,
-    assignedTo: {
-      _id: form.assignedTo?.key,
-      email: form.assignedTo?.email,
-      name: form.assignedTo?.name
-    }
+  const input = {
+    _id: taskId.value,
+    status: form.status
   }
-  const response = await create({ payload })
+  console.log(input, '## payload')
+  await update(input)
   emit('update:openEvent', false)
 }
-
 const handleEvent = (e: boolean) => {
   emit('update:openEvent', e)
 }

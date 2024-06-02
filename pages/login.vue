@@ -38,6 +38,7 @@
 import { signInWithEmailAndPassword, type Auth } from 'firebase/auth'
 import { reactive } from 'vue'
 import Input from '../components/form/input.vue'
+import Button from '../components/form/button.vue'
 
 definePageMeta({
   layout: 'dynamic'

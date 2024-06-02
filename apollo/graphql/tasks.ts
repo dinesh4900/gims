@@ -4,13 +4,15 @@ export const findManyTasks = gql`
       count
       items {
         _id
+        title
+        dueDate
+        description
+        status
         assignedTo {
           _id
           email
           name
         }
-        dueDate
-        description
       }
     }
   }
@@ -25,6 +27,8 @@ export const findTaskById = gql`
         _id
         name
       }
+      title
+      status
       dueDate
       description
     }
