@@ -33,7 +33,7 @@
       >
         <div v-for="product in products" :key="product.id" class="group">
           <div
-            class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
+            class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 shadow-lg group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out"
           >
             <img
               :src="product.imageSrc"

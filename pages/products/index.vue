@@ -22,32 +22,46 @@
       </div>
       <div
         v-for="(item, idx) in products"
-        class="border border-gray-400 rounded-xl p-4 mt-[50px]"
+        :key="idx"
+        class="product-container p-4 mt-[50px] flex items-center justify-between shadow-lg group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out"
       >
-        <h2 class="text-center font-semibold">
-          {{ item.title }}
-        </h2>
-        <p class="mt-4">
-          {{ item.description }}
-        </p>
-
-        <div class="mt-4">
-          <span class="font-semibold">Key features:</span>
-          <div
-            v-for="(feature, idx) in item.keyFeatures"
-            class="list-decimal pl-6 mt-1"
-          >
-            <div>&#x2022; {{ feature }}</div>
-          </div>
+        <div class="product-image">
+          <img
+            src="/assets/waterjet.jpeg"
+            alt="item.imageAlt"
+            class="h-[300px] w-[300px] object-cover object-center cursor-pointer group-hover:opacity-75"
+          />
         </div>
+        <div class="product-description flex-grow">
+          <h2 class="font-semibold">{{ item.title }}</h2>
+          <p class="mt-4">
+            {{ item.description }}
+          </p>
 
-        <div class="mt-4">
-          <span class="font-semibold">Benefits:</span>
-          <div
-            v-for="(benefit, idx) in item.benefits"
-            class="list-decimal pl-6 mt-1"
-          >
-            <div>&#x2022; {{ benefit }}</div>
+          <div class="mt-4">
+            <span class="font-semibold">Key features:</span>
+            <div
+              v-for="(feature, idx) in item.keyFeatures"
+              class="list-decimal pl-6 mt-1"
+            >
+              <div>&#x2022; {{ feature }}</div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <span class="font-semibold">Benefits:</span>
+            <div
+              v-for="(benefit, idx) in item.benefits"
+              class="list-decimal pl-6 mt-1"
+            >
+              <div>&#x2022; {{ benefit }}</div>
+            </div>
+          </div>
+          <div class="text-right mt-6">
+            <Button size="md" icon-type="endIcon" class="mr-4">
+              Get Qoute
+            </Button>
+            <Button size="md" icon-type="endIcon"> Download Broucher </Button>
           </div>
         </div>
       </div>
@@ -56,6 +70,7 @@
 </template>
 
 <script setup lang="ts">
+import Button from '../../components/form/button.vue'
 const products = [
   {
     title:
@@ -72,7 +87,8 @@ const products = [
       'Empower students with hands-on experience in advanced cutting technology.',
       'Enhance the curriculum with practical applications in engineering and design.',
       'Reliable support and training from our dedicated team.'
-    ]
+    ],
+    image: '../../assets/waterjet.jpeg'
   },
   {
     title:
@@ -89,7 +105,8 @@ const products = [
       'Improve productivity and reduce operational costs with efficient cutting technology.',
       'Achieve superior quality cuts, enhancing the final product.',
       'Benefit from reliable and responsive customer support tailored to your business needs.'
-    ]
+    ],
+    image: '/assets/waterjet.jpeg'
   },
   {
     title:
@@ -106,7 +123,34 @@ const products = [
       'Efficiently handle large-scale decommissioning and descaling tasks.',
       'Ensure safety and precision in hazardous environments.',
       'Rely on a machine designed for maximum uptime and minimal maintenance.'
-    ]
+    ],
+    image: '/assets/waterjet.jpeg'
   }
 ]
 </script>
+
+<style scoped>
+.product-container {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.product-image {
+  width: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.product-description {
+  flex-grow: 1;
+  padding-left: 1rem; /* Adjust spacing between image and text */
+}
+
+.product-container:hover {
+  transform: scale(1.01); /* Zoom on hover */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+</style>

@@ -4,7 +4,7 @@
     size="lg"
     @update:open-event="updateOpenEvent($event)"
   >
-    <template #title>Update Accommodation Status</template>
+    <template #title>Service Requirements</template>
 
     <template #content>
       <div class="flex flex-wrap gap-4">
