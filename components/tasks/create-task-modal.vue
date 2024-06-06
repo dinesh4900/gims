@@ -69,7 +69,6 @@
             :name="'Work category'"
             :placeholder="'Work category'"
             :is-start-case-text="true"
-            class="w-full"
           />
         </div>
       </div>
@@ -103,7 +102,7 @@ import Dialog from '../../components/common/dialog.vue'
 import EmployeeSelect from '../../components/common/employee-select.vue'
 import Input from '../../components/form/input.vue'
 import Button from '../../components/form/button.vue'
-import Vselect from '../../components/form/button.vue'
+import Vselect from '../../components/form/VSelect.vue'
 import { useTasksRepo } from '~/repos/tasks'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -144,6 +143,7 @@ const handleSave = async () => {
     description: form.description,
     dueDate: form.dueDate,
     status: TaskStatusEnum.Assigned,
+    workCategory: form.workCategory,
     serviceRequirement: {
       _id: form?.serviceRequirement?.key,
       name: form?.serviceRequirement?.name,

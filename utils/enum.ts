@@ -13,9 +13,9 @@ export enum TaskStatusEnum {
 export enum WorkCategoryEnum {
   Design = 'Design',
   Discussion = 'Discussion',
-  DocumentationPPT = 'Documentation/PPT',
-  EducationResearch = 'Education Research',
-  AssemblyFabrication = 'Assembly Fabrication',
+  DocumentationPPT = 'DocumentationPPT',
+  EducationResearch = 'EducationResearch',
+  AssemblyFabrication = 'AssemblyFabrication',
   Testing = 'Testing',
   Marketing = 'Marketing',
   Study = 'Study',

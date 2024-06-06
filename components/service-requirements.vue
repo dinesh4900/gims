@@ -109,6 +109,7 @@ import { useServicesRepo } from '~/repos/service'
 import Dialog from './common/dialog.vue'
 import Button from './form/button.vue'
 import Input from './form/input.vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
   isModalOpen: {
@@ -118,8 +119,14 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  selectedService: {
+    type: String,
+    default: ''
   }
 })
+
+const { selectedService } = toRefs(props)
 
 const form = reactive({
   name: '',
@@ -139,6 +146,14 @@ const updateOpenEvent = (e: boolean) => {
 }
 
 const { createServiceReq } = useServicesRepo()
+
+watch(
+  selectedService,
+  (newVal) => {
+    form.fieldOfService = newVal
+  },
+  { immediate: true }
+)
 
 const handleSave = async () => {
   const payload = {

@@ -32,18 +32,20 @@
         class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-8 mt-6"
       >
         <div v-for="product in products" :key="product.id" class="group">
-          <div
-            class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 shadow-lg group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out group-hover:shadow-blue-200"
-          >
-            <img
-              :src="product.imageSrc"
-              :alt="product.imageAlt"
-              class="h-full w-full object-cover object-center group-hover:opacity-75"
-            />
+          <div @click="handleClick(product.name)">
+            <div
+              class="aspect-h-1 aspect-w-1 w-full cursor-pointer overflow-hidden rounded-lg bg-gray-200 shadow-lg group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out group-hover:shadow-blue-200"
+            >
+              <img
+                :src="product.imageSrc"
+                :alt="product.imageAlt"
+                class="h-full w-full object-cover object-center group-hover:opacity-75"
+              />
+            </div>
+            <h3 class="mt-4 text-gray-700 text-center text-lg">
+              {{ product.name }}
+            </h3>
           </div>
-          <h3 class="mt-4 text-gray-700 text-center text-lg">
-            {{ product.name }}
-          </h3>
         </div>
       </div>
       <div class="mt-10 text-center">
@@ -60,16 +62,26 @@
   </div>
   <ServiceRequirements
     :is-modal-open="openSubmitRequirements"
+    :selected-service="selectedService"
     @update:open-event="openSubmitRequirements = $event"
   />
 </template>
 
 <script setup lang="ts">
 import Button from '../../components/form/button.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const openSubmitRequirements = ref(false)
+const selectedService = ref('')
 
 const handleOpenSubmitRequirements = () => {
+  openSubmitRequirements.value = true
+}
+
+const handleClick = (productName: string) => {
+  selectedService.value = productName
   openSubmitRequirements.value = true
 }
 

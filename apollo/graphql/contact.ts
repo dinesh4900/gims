@@ -7,6 +7,15 @@ export const createContact = gql`
   }
 `
 
+export const updateContact = gql`
+  mutation updateContact($payload: UpdateContactInputDto!) {
+    updateContact(input: $payload) {
+      _id
+      firstName
+    }
+  }
+`
+
 export const findManyContacts = gql`
   query findManyContacts($paging: PagingInputDto) {
     findManyContacts(pagingInput: $paging) {
@@ -18,6 +27,7 @@ export const findManyContacts = gql`
         email
         mobile
         description
+        isAcknowledged
       }
     }
   }

@@ -8,6 +8,18 @@ export const createServiceRequirement = gql`
     }
   }
 `
+
+export const updateServiceRequirement = gql`
+  mutation updateServiceRequirement(
+    $payload: UpdateServiceRequirementInputDto!
+  ) {
+    updateServiceRequirement(input: $payload) {
+      _id
+      name
+    }
+  }
+`
+
 export const findManyServiceRequirements = gql`
   query findManyServiceRequirements($paging: PagingInputDto) {
     findManyServiceRequirements(pagingInput: $paging) {
@@ -22,6 +34,7 @@ export const findManyServiceRequirements = gql`
         address
         fieldOfService
         requirements
+        isAcknowledged
       }
     }
   }

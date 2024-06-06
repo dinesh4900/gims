@@ -2,7 +2,8 @@ import { mutateGql, queryGql } from '~/apollo/config/client'
 import {
   createContact,
   findContactById,
-  findManyContacts
+  findManyContacts,
+  updateContact
 } from '~/apollo/graphql/contact'
 
 export const useContactRepo = () => {
@@ -12,6 +13,21 @@ export const useContactRepo = () => {
         const { data, errors } = await mutateGql(
           GqlEndpoint.Gims,
           createContact,
+          payload
+        )
+        if (errors) {
+          console.log('error', errors)
+        }
+        return data
+      } catch (e) {
+        console.log('error', e)
+      }
+    },
+    updateContact: async (payload: any) => {
+      try {
+        const { data, errors } = await mutateGql(
+          GqlEndpoint.Gims,
+          updateContact,
           payload
         )
         if (errors) {

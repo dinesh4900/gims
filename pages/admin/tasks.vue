@@ -59,6 +59,9 @@
                   {{ task.status }}
                 </td>
                 <td class="px-6 py-4 font-normal whitespace-nowrap">
+                  {{ startCase(task.workCategory) }}
+                </td>
+                <td class="px-6 py-4 font-normal whitespace-nowrap">
                   {{ getFormattedDate(task.dueDate) }}
                 </td>
                 <td class="px-6 py-4 font-normal whitespace-nowrap">
@@ -111,7 +114,7 @@ import UpdateTaskModal from '../../components/tasks/update-task-modal.vue'
 import CreateTaskModal from '../../components/tasks/create-task-modal.vue'
 import Pagination from '../../components/form/pagination.vue'
 import { ArrowLongRightIcon } from '@heroicons/vue/24/solid'
-
+import { startCase } from 'lodash'
 import { useRouter } from 'vue-router'
 import { useCurrentUser } from 'vuefire'
 
@@ -174,6 +177,7 @@ const headers = [
   'Title',
   'Assigned to',
   'Status',
+  'Work Category',
   'Date',
   'Service requirement',
   'Descrption'

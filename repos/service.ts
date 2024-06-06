@@ -1,7 +1,8 @@
 import {
   createServiceRequirement,
   findManyServiceRequirements,
-  findServiceRequirementById
+  findServiceRequirementById,
+  updateServiceRequirement
 } from '../apollo/graphql/services'
 import { mutateGql, queryGql } from '~/apollo/config/client'
 
@@ -12,6 +13,22 @@ export const useServicesRepo = () => {
         const { data, errors } = await mutateGql(
           GqlEndpoint.Gims,
           createServiceRequirement,
+          payload
+        )
+        if (errors) {
+          console.log('error', errors)
+        }
+        return data
+      } catch (e) {
+        console.log('error', e)
+      }
+    },
+    update: async (payload: any) => {
+      console.log(payload, '## payload')
+      try {
+        const { data, errors } = await mutateGql(
+          GqlEndpoint.Gims,
+          updateServiceRequirement,
           payload
         )
         if (errors) {

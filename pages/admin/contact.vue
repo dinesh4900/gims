@@ -33,19 +33,10 @@
                       class="'relative px-6 py-4 -mx-px font-semibold transition duration-150 delay-75 whitespace-nowrap'"
                     >
                       {{ person.firstName }} {{ person.lastName }}
-
-                      <!-- <div
-                        class="absolute inset-y-0 right-0 flex items-center justify-end flex-initial w-full h-full duration-150 ease-in-out origin-right scale-0 group-hover:scale-95 whitespace-nowrap"
-                      >
-                        <div
-                          class="inline-flex items-center py-0.5 pr-2 m-2 text-xs font-semibold text-blue-600 bg-blue-100 rounded cursor-pointer pl-3 border border-blue-200"
-                        >
-                          Go to &nbsp;<ArrowLongRightIcon
-                            class="w-5 h-5 text-center"
-                          />
-                        </div>
-                      </div> -->
                     </div>
+                  </td>
+                  <td class="px-6 py-4 font-normal whitespace-nowrap">
+                    {{ person.isAcknowledged ? 'Yes' : 'No' }}
                   </td>
                   <td class="px-6 py-4 font-normal whitespace-nowrap">
                     {{ person.email }}
@@ -55,6 +46,16 @@
                   </td>
                   <td class="px-6 py-4 font-normal whitespace-nowrap">
                     {{ person.description }}
+                  </td>
+                  <td class="px-6 py-4 font-normal whitespace-nowrap"></td>
+                  <td class="px-6 py-4 font-normal whitespace-nowrap">
+                    <Button
+                      color="blue"
+                      size="md"
+                      @click="handleAcknowledge(person._id)"
+                    >
+                      Save
+                    </Button>
                   </td>
                 </tr>
               </tbody>
@@ -91,6 +92,7 @@ import { useContactRepo } from '~/repos/contact'
 import Pagination from '../../components/form/pagination.vue'
 import { useRouter } from 'vue-router'
 import { useCurrentUser } from 'vuefire'
+import Button from '../../components/form/button.vue'
 
 const user = useCurrentUser()
 const router = useRouter()
@@ -100,7 +102,7 @@ const totalCount = ref<number>(10)
 const limit = ref<number>(10)
 const offset = ref<number>(0)
 
-const { findAll } = useContactRepo()
+const { findAll, updateContact } = useContactRepo()
 
 const fetchAllPersons = async () => {
   const response = await findAll({
@@ -115,6 +117,15 @@ const changePageFilter = async (page: number) => {
   await fetchAllPersons()
 }
 
+const handleAcknowledge = (id: string) => {
+  const payload = {
+    _id: id,
+    isAcknowledged: true
+  }
+  updateContact({ payload })
+  fetchAllPersons()
+}
+
 onMounted(() => {
   fetchAllPersons()
 })
@@ -127,5 +138,11 @@ watch(user, (val) => {
   }
 })
 
-const headers = ['Name', 'Email', 'Mobile number', 'Description']
+const headers = [
+  'Name',
+  'Is Acknowledged',
+  'Email',
+  'Mobile number',
+  'Description'
+]
 </script>
