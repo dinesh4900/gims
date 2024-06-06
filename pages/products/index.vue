@@ -20,20 +20,21 @@
           class="h-[80%] w-[80%] object-cover object-center group-hover:opacity-75"
         />
       </div>
+
       <div
         v-for="(item, idx) in products"
         :key="idx"
-        class="product-container p-4 mt-[50px] flex items-center justify-between shadow-lg group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out"
+        class="p-4 mt-[50px] shadow-lg bg-blue-700 text-white rounded-xl group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out"
       >
-        <div class="product-image">
+        <div class="ml-[375px]">
           <img
             src="/assets/waterjet.jpeg"
             alt="item.imageAlt"
-            class="h-[300px] w-[300px] object-cover object-center cursor-pointer group-hover:opacity-75"
+            class="h-[300px] w-[450px] object-cover object-center cursor-pointer group-hover:opacity-75"
           />
         </div>
-        <div class="product-description flex-grow">
-          <h2 class="font-semibold">{{ item.title }}</h2>
+        <div class="flex-grow mt-10">
+          <h2 class="font-bold text-center text-2xl">{{ item.title }}</h2>
           <p class="mt-4">
             {{ item.description }}
           </p>
@@ -58,12 +59,21 @@
             </div>
           </div>
           <div class="text-right mt-6">
-            <Button size="md" icon-type="endIcon" class="mr-4">
-              Get Qoute
+            <Button
+              size="md"
+              color="white"
+              icon-type="endIcon"
+              :icon="ArrowDownLeftIcon"
+            >
+              Download Broucher
             </Button>
-            <Button size="md" icon-type="endIcon"> Download Broucher </Button>
           </div>
         </div>
+      </div>
+      <div class="text-center mt-10">
+        <Button size="lg" icon-type="endIcon" class="mr-4 items-center">
+          Get Qoute
+        </Button>
       </div>
     </div>
   </div>
@@ -71,6 +81,7 @@
 
 <script setup lang="ts">
 import Button from '../../components/form/button.vue'
+import { ArrowDownLeftIcon } from '@heroicons/vue/24/solid'
 const products = [
   {
     title:
@@ -128,29 +139,3 @@ const products = [
   }
 ]
 </script>
-
-<style scoped>
-.product-container {
-  display: flex;
-  flex-wrap: nowrap;
-  width: 100%;
-  border-radius: 5px;
-  padding: 1rem;
-}
-
-.product-image {
-  width: 50%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.product-description {
-  flex-grow: 1;
-  padding-left: 1rem; /* Adjust spacing between image and text */
-}
-
-.product-container:hover {
-  transform: scale(1.01); /* Zoom on hover */
-  transition: transform 0.3s ease-in-out; /* Smooth transition */
-}
-</style>

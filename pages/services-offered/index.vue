@@ -13,7 +13,7 @@
           <div class="text-center">
             <Button
               color="blue"
-              size="sm"
+              size="md"
               class="!font-medium items-start"
               @click="handleOpenSubmitRequirements"
             >
@@ -33,7 +33,7 @@
       >
         <div v-for="product in products" :key="product.id" class="group">
           <div
-            class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 shadow-lg group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out"
+            class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 shadow-lg group-hover:bg-gray-300 group-hover:transform group-hover:scale-105 transition duration-300 ease-in-out group-hover:shadow-blue-200"
           >
             <img
               :src="product.imageSrc"
@@ -49,7 +49,7 @@
       <div class="mt-10 text-center">
         <Button
           color="blue"
-          size="sm"
+          size="md"
           class="!font-medium items-start"
           @click="handleOpenSubmitRequirements"
         >
@@ -124,3 +124,11 @@ const products = [
   }
 ]
 </script>
+
+<style>
+.shadow-blue-400 {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+</style>

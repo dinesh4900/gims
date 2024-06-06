@@ -52,12 +52,26 @@
       </div>
 
       <div class="flex flex-wrap md:flex-nowrap gap-4 mt-4">
-        <Input
-          v-model="form.description"
-          label="Description"
-          placeholder="Enter description"
-          class="w-full"
-        />
+        <div class="w-full md:w-[262px]">
+          <Input
+            v-model="form.description"
+            label="Description"
+            placeholder="Enter description"
+            class="w-full"
+          />
+        </div>
+
+        <div class="w-full md:w-[262px]">
+          <Vselect
+            v-model="form.workCategory"
+            :value="form.workCategory"
+            :items="workCategoryOptions"
+            :name="'Work category'"
+            :placeholder="'Work category'"
+            :is-start-case-text="true"
+            class="w-full"
+          />
+        </div>
       </div>
     </template>
     <template #footer>
@@ -89,10 +103,12 @@ import Dialog from '../../components/common/dialog.vue'
 import EmployeeSelect from '../../components/common/employee-select.vue'
 import Input from '../../components/form/input.vue'
 import Button from '../../components/form/button.vue'
+import Vselect from '../../components/form/button.vue'
 import { useTasksRepo } from '~/repos/tasks'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import ServicesSelect from '../../components/common/services-select.vue'
+import { WorkCategoryEnum } from '~/utils/enum'
 
 const props = defineProps({
   isModalOpen: {
@@ -110,7 +126,8 @@ const form = reactive({
   assignedTo: null as any,
   serviceRequirement: null as any,
   description: '',
-  dueDate: ''
+  dueDate: '',
+  workCategory: null as any
 })
 
 const emit = defineEmits(['update:openEvent'])
@@ -147,4 +164,6 @@ const handleSave = async () => {
 const handleEvent = (e: boolean) => {
   emit('update:openEvent', e)
 }
+
+const workCategoryOptions = Object.values(WorkCategoryEnum)
 </script>

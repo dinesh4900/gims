@@ -20,10 +20,17 @@ import { values } from 'lodash';
             class="w-full"
           />
         </div>
+        <TextArea
+          v-model="form.employeeNotes"
+          label="Employee notes"
+          :rows="3"
+          :cols="20"
+          name="Employee notes"
+          placeholder="Description"
+        />
       </div>
     </template>
     <template #footer>
-      {{ taskId }}
       <div class="flex flex-wrap gap-4 w-full justify-between mt-4">
         <Button
           color="white"
@@ -52,9 +59,8 @@ import Dialog from '../../components/common/dialog.vue'
 import Vselect from '../../components/form/VSelect.vue'
 import Button from '../../components/form/button.vue'
 import { useTasksRepo } from '~/repos/tasks'
-import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import EmployeeSelect from '../../components/common/employee-select.vue'
+import TextArea from '../../components/form/text-area.vue'
 
 const props = defineProps({
   isModalOpen: {
@@ -72,7 +78,8 @@ const props = defineProps({
 })
 
 const form = reactive({
-  status: null as any
+  status: null as any,
+  employeeNotes: ''
 })
 
 const { taskId } = toRefs(props)
@@ -81,7 +88,6 @@ const { update, findOne } = useTasksRepo()
 const fetchOneTask = async () => {
   const dataResp = await findOne(taskId.value)
   const findOneData = dataResp?.result?.data?.findTaskById
-  console.log(findOneData, '## findOneData')
   form.status = findOneData.status
 }
 
@@ -104,9 +110,9 @@ const updateOpenEvent = (e: boolean) => {
 const handleSave = async () => {
   const input = {
     _id: taskId.value,
-    status: form.status
+    status: form.status,
+    employeeNotes: form.employeeNotes
   }
-  console.log(input, '## payload')
   await update(input)
   emit('update:openEvent', false)
 }

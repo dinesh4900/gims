@@ -8,6 +8,7 @@ export const findManyTasks = gql`
         dueDate
         description
         status
+        workCategory
         serviceRequirement {
           _id
           name
@@ -34,6 +35,7 @@ export const findTaskById = gql`
         _id
         name
       }
+      workCategory
       serviceRequirement {
         _id
         name
