@@ -97,10 +97,12 @@
   </div>
 
   <CreateTaskModal
+    v-if="openCreateModal"
     :is-modal-open="openCreateModal"
     @update:open-event="handleCreateModal"
   />
   <UpdateTaskModal
+    v-if="openUpdateModal"
     :is-modal-open="openUpdateModal"
     :task-id="taskId"
     @update:open-event="handleUpdateModal"

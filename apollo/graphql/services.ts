@@ -5,6 +5,7 @@ export const createServiceRequirement = gql`
     createServiceRequirement(input: $payload) {
       _id
       name
+      documentUrl
     }
   }
 `
@@ -35,6 +36,7 @@ export const findManyServiceRequirements = gql`
         fieldOfService
         requirements
         isAcknowledged
+        documentUrl
       }
     }
   }
@@ -50,6 +52,7 @@ export const findServiceRequirementById = gql`
       companyName
       requirements
       designation
+      documentUrl
     }
   }
 `

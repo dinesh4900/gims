@@ -71,6 +71,16 @@
             :is-start-case-text="true"
           />
         </div>
+        <div class="w-full md:w-[262px]">
+          <Vselect
+            v-model="form.workCategory"
+            :value="form.workCategory"
+            :items="workCategoryOptions"
+            :name="'Work category'"
+            :placeholder="'Work category'"
+            :is-start-case-text="true"
+          />
+        </div>
       </div>
     </template>
     <template #footer>
@@ -129,6 +139,21 @@ const form = reactive({
   workCategory: null as any
 })
 
+// const storage = useFirebaseStorage()
+
+// const handleUpload = async (e: any) => {
+//   console.log(e, '## event')
+//   const mountainFileRef = storageRef(storage, e.name)
+
+//   console.log(mountainFileRef, '## mountain ref')
+
+//   const { url, upload } = useStorageFile(mountainFileRef)
+
+//   const dataResp = await upload(e)
+
+//   console.log('## came to last file', url)
+// }
+
 const emit = defineEmits(['update:openEvent'])
 
 const updateOpenEvent = (e: boolean) => {
@@ -149,7 +174,7 @@ const handleSave = async () => {
       name: form?.serviceRequirement?.name,
       email: form?.serviceRequirement?.email,
       fieldOfService: form?.serviceRequirement?.fieldOfService,
-      requirements: form?.serviceRequirement?.fieldOfService
+      requirements: form?.serviceRequirement?.requirements
     },
     assignedTo: {
       _id: form.assignedTo?.key,

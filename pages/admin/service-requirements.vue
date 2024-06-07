@@ -160,6 +160,7 @@ const headers = [
   'Address',
   'Fields of service',
   'Requirements',
+  'Dowcument',
   'Action'
 ]
 </script>

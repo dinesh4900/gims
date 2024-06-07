@@ -78,6 +78,7 @@
             class="w-full"
           />
         </div>
+        <input type="file" @change="handleUpload" />
       </div>
     </template>
     <template #footer>
@@ -111,6 +112,9 @@ import Button from './form/button.vue'
 import Input from './form/input.vue'
 import { useRouter } from 'vue-router'
 
+import { ref as storageRef } from 'firebase/storage'
+import { useFirebaseStorage, useStorageFile } from 'vuefire'
+
 const props = defineProps({
   isModalOpen: {
     type: Boolean,
@@ -136,8 +140,26 @@ const form = reactive({
   address: '',
   email: '',
   fieldOfService: '',
-  requirements: ''
+  requirements: '',
+  documentUrl: ''
 })
+
+const storage = useFirebaseStorage()
+
+const handleUpload = async (e: any) => {
+  try {
+    const file = e.target.files[0]
+
+    const fileRef = storageRef(storage, file.name)
+
+    const { url, upload } = useStorageFile(fileRef)
+
+    await upload(file)
+    form.documentUrl = url.value as string
+  } catch (error) {
+    console.error('Error uploading file', error)
+  }
+}
 
 const emit = defineEmits(['update:openEvent'])
 
@@ -164,7 +186,8 @@ const handleSave = async () => {
     address: form.address,
     email: form.email,
     fieldOfService: form.fieldOfService,
-    requirements: form.requirements
+    requirements: form.requirements,
+    documentUrl: form.documentUrl
   }
   await createServiceReq({ payload })
   emit('update:openEvent', false)
